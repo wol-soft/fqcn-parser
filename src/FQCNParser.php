@@ -49,9 +49,13 @@ class FQCNParser
 
     private static function getClassNameFromTokenizedFile(array $tokens, string $filePath): string
     {
+        if (!defined('T_ENUM')) {
+            define('T_ENUM', 336);
+        }
+
         $count = count($tokens);
         for ($i = 2; $i < $count; $i++) {
-            if ($tokens[$i - 2][0] == T_CLASS
+            if (in_array($tokens[$i - 2][0], [T_CLASS, T_INTERFACE, T_TRAIT, T_ENUM])
                 && $tokens[$i - 1][0] == T_WHITESPACE
                 && $tokens[$i][0] == T_STRING
             ) {

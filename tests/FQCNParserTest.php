@@ -7,7 +7,13 @@ namespace tests;
 use Exception;
 use FQCNParser\FQCNParser;
 use GlobalClass;
+use GlobalEnum;
+use GlobalInterface;
+use GlobalTrait;
 use MyApp\Classes\NamespacedClass;
+use MyApp\Classes\NamespacedEnum;
+use MyApp\Classes\NamespacedInterface;
+use MyApp\Classes\NamespacedTrait;
 use PHPUnit\Framework\TestCase;
 
 class FQCNParserTest extends TestCase
@@ -36,5 +42,41 @@ class FQCNParserTest extends TestCase
     public function testNamespacedClass(): void
     {
         $this->assertSame(NamespacedClass::class, FQCNParser::getFQCNFromFile(__DIR__ . '/files/NamespacedClass.php'));
+    }
+
+    public function testGlobalInterface(): void
+    {
+        $this->assertSame(GlobalInterface::class, FQCNParser::getFQCNFromFile(__DIR__ . '/files/GlobalInterface.php'));
+    }
+
+    public function testNamespacedInterface(): void
+    {
+        $this->assertSame(NamespacedInterface::class, FQCNParser::getFQCNFromFile(__DIR__ . '/files/NamespacedInterface.php'));
+    }
+
+    public function testGlobalTrait(): void
+    {
+        $this->assertSame(GlobalTrait::class, FQCNParser::getFQCNFromFile(__DIR__ . '/files/GlobalTrait.php'));
+    }
+
+    public function testNamespacedTrait(): void
+    {
+        $this->assertSame(NamespacedTrait::class, FQCNParser::getFQCNFromFile(__DIR__ . '/files/NamespacedTrait.php'));
+    }
+
+    /**
+     * @requires PHP >= 8.1
+     */
+    public function testGlobalEnum(): void
+    {
+        $this->assertSame(GlobalEnum::class, FQCNParser::getFQCNFromFile(__DIR__ . '/files/GlobalEnum.php'));
+    }
+
+    /**
+     * @requires PHP >= 8.1
+     */
+    public function testNamespacedEnum(): void
+    {
+        $this->assertSame(NamespacedEnum::class, FQCNParser::getFQCNFromFile(__DIR__ . '/files/NamespacedEnum.php'));
     }
 }

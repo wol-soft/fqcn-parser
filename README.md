@@ -5,7 +5,7 @@
 
 # fqcn-parser
 
-Parse the FQCN from a PHP file containing a class.
+Parse the FQCN from a PHP file containing a class, an interface, a trait or an enum (requires PHP >= 8.1).
 
 ## Requirements ##
 
